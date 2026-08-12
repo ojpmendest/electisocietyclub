@@ -341,41 +341,27 @@
   .card-membership .btn-primary{width:100%;padding:14px;font-size:15px;}
   .card-fine{font-size:12px;color:var(--mute);margin-top:14px;text-align:center;}
 
-  /* ---------- Testimonials ---------- */
+  /* ---------- Testimonials (real screenshots) ---------- */
   .testimonials{border-top:1px solid var(--line);}
   .testimonials h2{font-size:clamp(26px,4vw,36px);max-width:620px;}
-  .testi-grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit, minmax(260px, 1fr));
-    gap:16px;
+  .proof-grid{
+    column-count:3;
+    column-gap:16px;
     margin-top:40px;
   }
-  .testi-card{
-    border:1px solid var(--line);
-    border-radius:var(--radius);
-    background:var(--ink-2);
-    padding:26px 24px;
-    position:relative;
-  }
-  .testi-card::before{
-    content:"\201C";
-    font-family:'Fraunces',serif;
-    font-size:52px;
-    color:var(--brass-dim);
-    line-height:1;
+  .proof-shot{
+    width:100%;
     display:block;
-    margin-bottom:4px;
-  }
-  .testi-quote{
-    font-size:14.5px;
-    color:var(--bone-dim);
     margin-bottom:16px;
+    border-radius:14px;
+    border:1px solid var(--line);
+    break-inside:avoid;
   }
-  .testi-name{
-    font-size:13px;
-    font-weight:700;
-    color:var(--brass);
-    margin:0;
+  @media (max-width:900px){
+    .proof-grid{column-count:2;}
+  }
+  @media (max-width:560px){
+    .proof-grid{column-count:1;}
   }
 
   /* ---------- FAQ ---------- */
@@ -406,6 +392,29 @@
   footer .logo-icon{width:34px;height:auto;margin:0 auto 16px;opacity:0.9;}
   footer p{margin:0 0 6px;font-size:13px;color:var(--mute);}
   footer .tag{font-family:'Fraunces',serif;font-style:italic;color:var(--bone-dim);font-size:14.5px;}
+
+  /* ---------- Scroll reveal ---------- */
+  .reveal{
+    opacity:0;
+    transform:translateY(22px);
+  }
+  .reveal.in-view{
+    opacity:1;
+    transform:translateY(0);
+  }
+  @media (prefers-reduced-motion:no-preference){
+    .reveal{
+      transition:opacity .65s cubic-bezier(.2,.7,.2,1), transform .65s cubic-bezier(.2,.7,.2,1);
+    }
+    .stagger .reveal:nth-child(1){transition-delay:0s;}
+    .stagger .reveal:nth-child(2){transition-delay:.08s;}
+    .stagger .reveal:nth-child(3){transition-delay:.16s;}
+    .stagger .reveal:nth-child(4){transition-delay:.24s;}
+    .stagger .reveal:nth-child(5){transition-delay:.32s;}
+  }
+  @media (prefers-reduced-motion:reduce){
+    .reveal{opacity:1;transform:none;}
+  }
 
   @media (max-width:640px){
     section{padding:64px 0;}

@@ -1,12 +1,15 @@
   document.getElementById('year').textContent = new Date().getFullYear();
 
   (function(){
-    var answers = {nivel:null, interesse:null, tempo:null, aberta:''};
+    // Cole aqui a URL do seu Apps Script depois de publicar (veja instruções no README)
+    var SHEET_WEBHOOK_URL = '';
+
+    var answers = {nivel:null, expertise:null, interesse:null, tempo:null, aberta:''};
     var steps = Array.from(document.querySelectorAll('.quiz-step'));
     var fill = document.getElementById('quizFill');
     var label = document.getElementById('quizLabel');
     var current = 0;
-    var totalSteps = 4; // steps 0-3 are questions, step 4 is result
+    var totalSteps = 5; // steps 0-4 are questions, step 5 is result
 
     function showStep(i){
       steps.forEach(function(s){ s.classList.remove('active'); });
@@ -54,12 +57,34 @@
     function finish(){
       answers.aberta = openField.value.trim();
       buildResult();
+      sendToSheet();
       var precoSection = document.getElementById('preco');
       if(precoSection) precoSection.style.display = '';
-      showStep(4);
+      showStep(5);
     }
     if(finishBtn) finishBtn.addEventListener('click', finish);
     if(skipBtn) skipBtn.addEventListener('click', finish);
+
+    function sendToSheet(){
+      if(!SHEET_WEBHOOK_URL) return;
+      try {
+        fetch(SHEET_WEBHOOK_URL, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: {'Content-Type': 'text/plain'},
+          body: JSON.stringify({
+            data: new Date().toISOString(),
+            nivel: answers.nivel || '',
+            expertise: answers.expertise || '',
+            interesse: answers.interesse || '',
+            tempo: answers.tempo || '',
+            comentario: answers.aberta || ''
+          })
+        });
+      } catch(e) {
+        // Falha silenciosa: nunca deve travar a experiência do usuário
+      }
+    }
 
     function buildResult(){
       var nivelTxt = {
@@ -68,6 +93,7 @@
         'Já vivo disso':'já vivendo de marketing digital'
       }[answers.nivel] || 'construindo seu caminho';
 
+      var expertiseTxt = answers.expertise ? answers.expertise.toLowerCase() : null;
       var interesseTxt = answers.interesse ? answers.interesse.toLowerCase() : 'marketing digital';
 
       var tempoTxt = {
@@ -76,8 +102,36 @@
         'Ativamente':'disposto a participar ativamente'
       }[answers.tempo] || 'no seu ritmo';
 
+      var perfilTxt = expertiseTxt
+        ? 'Você está ' + nivelTxt + ' em ' + expertiseTxt + ', focado em ' + interesseTxt + ', e ' + tempoTxt + '. '
+        : 'Você está ' + nivelTxt + ', focado em ' + interesseTxt + ', e ' + tempoTxt + '. ';
+
       document.getElementById('resultBody').textContent =
-        'Você está ' + nivelTxt + ', focado em ' + interesseTxt + ', e ' + tempoTxt + '. ' +
+        perfilTxt +
         'É exatamente esse perfil que faz o Electi Club valer a pena. Que tal garantir sua vaga antes que o investimento suba?';
+    }
+  })();
+
+  // Scroll reveal
+  (function(){
+    try {
+      var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var els = document.querySelectorAll('.reveal');
+      if(reduceMotion || !('IntersectionObserver' in window)){
+        els.forEach(function(el){ el.classList.add('in-view'); });
+        return;
+      }
+      var io = new IntersectionObserver(function(entries){
+        entries.forEach(function(entry){
+          if(entry.isIntersecting){
+            entry.target.classList.add('in-view');
+            io.unobserve(entry.target);
+          }
+        });
+      }, {threshold:0.15, rootMargin:'0px 0px -30px 0px'});
+      els.forEach(function(el){ io.observe(el); });
+    } catch(e) {
+      // Se algo falhar, garante que o conteúdo continua visível
+      document.querySelectorAll('.reveal').forEach(function(el){ el.classList.add('in-view'); });
     }
   })();
