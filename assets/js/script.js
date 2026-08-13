@@ -2,7 +2,7 @@
 
   (function(){
     // Cole aqui a URL do seu Apps Script depois de publicar (veja instruções no README)
-    var SHEET_WEBHOOK_URL = '';
+    var SHEET_WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbwhM8eybu59EPl8DB14OK2zwB8lhMaQhGiuZh9INRqLpFYH4TLpSTgmPaJ4EHv8xU-b/exec';
 
     var answers = {nivel:null, expertise:null, interesse:null, tempo:null, aberta:''};
     var steps = Array.from(document.querySelectorAll('.quiz-step'));
