@@ -7,12 +7,17 @@ Site estático (HTML, CSS e JS puros, sem build/framework). Pronto pra subir no 
 ```
 .
 ├── index.html
+├── quiz/
+│   └── index.html          (página standalone do quiz, pré-checkout)
 ├── assets/
 │   ├── css/styles.css
+│   ├── css/quiz.css
 │   ├── js/script.js
+│   ├── js/quiz.js
 │   └── img/
 │       ├── logo-full.png
-│       └── logo-icon.png
+│       ├── logo-icon.png
+│       └── proof/           (prints reais usados na LP)
 └── README.md
 ```
 
@@ -48,6 +53,31 @@ Qualquer novo `git push` na branch `main` já dispara um novo deploy automático
 
 ## O que ajustar antes de publicar de verdade
 
-- **Preço**: hoje está R$17,90/mês, no arquivo `index.html`, dentro da seção `<section class="pricing" id="preco">`.
-- **Link de checkout**: já aponta pro checkout da Hubla (`id="checkoutLink"`), confirme se é o link certo antes de divulgar.
-- **Fonte de dados do quiz**: hoje as respostas do quiz não são salvas em lugar nenhum (só geram o texto de resultado na tela). Se quiser capturar essas respostas (nome, WhatsApp, respostas), me avise que a gente integra com alguma ferramenta (Google Sheets, planilha, CRM, etc.).
+- **Preço**: hoje está R$17,90/ano, no arquivo `index.html` e também em `quiz/index.html`, dentro da seção `<section class="pricing" id="preco">`. Ajuste os dois arquivos se mudar de novo.
+- **Link de checkout**: já aponta pro checkout da Hubla (`id="checkoutLink"`), confirme se é o link certo antes de divulgar. Também presente nos dois arquivos.
+- **Página do quiz (`/quiz`)**: página separada da LP, pensada como passo pré-checkout. Pede nome + 4 perguntas de perfil + campo aberto, gera um resultado personalizado e só então revela o preço. A LP principal (`index.html`) continua como está, com o quiz embutido nela também; as duas existem em paralelo por enquanto.
+
+### Salvar as respostas do quiz numa planilha (Google Sheets)
+
+As respostas (nome, nível, área, interesse, tempo disponível, comentário) já são coletadas em `assets/js/quiz.js`, mas só são enviadas se você configurar um webhook. Passo a passo:
+
+1. Crie uma planilha nova no Google Sheets, com estas colunas na primeira linha: `data`, `nome`, `nivel`, `expertise`, `interesse`, `tempo`, `comentario`.
+2. Na planilha, vá em **Extensões → Apps Script**.
+3. Apague o código padrão e cole:
+
+```javascript
+function doPost(e) {
+  var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+  var data = JSON.parse(e.postData.contents);
+  sheet.appendRow([data.data, data.nome, data.nivel, data.expertise, data.interesse, data.tempo, data.comentario]);
+  return ContentService.createTextOutput(JSON.stringify({status: 'ok'})).setMimeType(ContentService.MimeType.JSON);
+}
+```
+
+4. Clique em **Implantar → Nova implantação → Aplicativo da web**.
+5. Em "Quem pode acessar", selecione **Qualquer pessoa**. Clique em **Implantar** e autorize o acesso.
+6. Copie a URL do aplicativo da web gerada (termina em `/exec`).
+7. Cole essa URL na variável `SHEET_WEBHOOK_URL` no topo de `assets/js/quiz.js` (e em `assets/js/script.js`, se quiser capturar as respostas do quiz embutido na LP também).
+8. Suba a alteração pro GitHub, o Vercel republica sozinho.
+
+Sem esse passo, o quiz funciona normalmente para quem responde, só que as respostas não ficam salvas em lugar nenhum.

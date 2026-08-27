@@ -1,0 +1,58 @@
+/* ---------- Página standalone do quiz ---------- */
+
+.quiz-wrap{
+  max-width:640px;
+  margin:0 auto;
+  padding:0 24px;
+}
+
+header .wrap{justify-content:center;}
+header .logo-full{height:22px;width:auto;}
+
+.quiz-hero{
+  text-align:center;
+  padding:72px 0 8px;
+}
+.quiz-hero h1{
+  font-size:clamp(30px,5vw,44px);
+  max-width:520px;
+  margin:0 auto 16px;
+}
+.quiz-hero .lead{
+  max-width:460px;
+  margin:0 auto 30px;
+}
+.quiz-hero .proof{
+  font-size:13px;
+  color:var(--mute);
+  margin-top:18px;
+}
+
+.quiz-section{padding-top:24px;}
+.quiz-section .quiz-card{
+  max-width:100%;
+  margin:0 auto;
+}
+
+.quiz-input{
+  width:100%;
+  background:var(--ink);
+  border:1px solid var(--line);
+  border-radius:10px;
+  color:var(--bone);
+  font-family:'Inter',sans-serif;
+  font-size:16px;
+  padding:14px;
+  margin-bottom:24px;
+}
+.quiz-input:focus{
+  outline:none;
+  border-color:var(--brass);
+}
+.quiz-input::placeholder{color:var(--mute);}
+
+#preco{padding-top:56px;}
+
+@media (max-width:640px){
+  .quiz-hero{padding-top:56px;}
+}

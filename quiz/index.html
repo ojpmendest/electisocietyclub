@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Electi Club | Antes de você entrar</title>
+<meta name="description" content="Antes de entrar no Electi Club, vamos te conhecer. Leva menos de um minuto.">
+<link rel="icon" type="image/png" href="../assets/img/logo-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/styles.css">
+<link rel="stylesheet" href="../assets/css/quiz.css">
+<noscript><style>.reveal{opacity:1!important;transform:none!important;}</style></noscript>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a href="/"><img class="logo-full" src="../assets/img/logo-full.png" alt="Electi Club"></a>
+  </div>
+</header>
+
+<section class="quiz-hero" id="topo">
+  <div class="quiz-wrap">
+    <div class="seal-wrap">
+      <span class="seal-ring"></span>
+      <img class="seal-icon" src="../assets/img/logo-icon.png" alt="">
+    </div>
+    <p class="eyebrow">Antes de você entrar</p>
+    <h1>Vamos te conhecer primeiro.</h1>
+    <p class="lead">Isso não é uma avaliação. É a forma como o Electi Club conhece quem está chegando, para que a comunidade já saiba quem você é assim que você entrar. Leva menos de um minuto.</p>
+    <div class="cta-row">
+      <a class="btn btn-primary" href="#quiz" id="startBtn">Começar</a>
+    </div>
+    <p class="proof">Os escolhidos escolhem entrar.</p>
+  </div>
+</section>
+
+<section class="quiz-section" id="quiz">
+  <div class="quiz-wrap">
+    <div class="quiz-card reveal">
+      <div class="quiz-progress">
+        <div class="quiz-progress-track"><div class="quiz-progress-fill" id="quizFill"></div></div>
+        <span class="quiz-progress-label" id="quizLabel">Passo 1 de 6</span>
+      </div>
+
+      <div class="quiz-step active" data-step="0">
+        <h3>Qual seu nome?</h3>
+        <input class="quiz-input" type="text" id="quizName" placeholder="Seu primeiro nome" autocomplete="given-name">
+        <div class="quiz-nav">
+          <span></span>
+          <button class="quiz-next" type="button" id="nameNext">Próximo</button>
+        </div>
+      </div>
+
+      <div class="quiz-step" data-step="1">
+        <h3>Qual seu nível hoje em marketing digital?</h3>
+        <div class="quiz-options" data-key="nivel">
+          <button class="quiz-opt" type="button">Iniciante</button>
+          <button class="quiz-opt" type="button">Já tenho resultados</button>
+          <button class="quiz-opt" type="button">Já vivo disso</button>
+        </div>
+        <div class="quiz-nav">
+          <button class="quiz-back" type="button">← voltar</button>
+          <button class="quiz-next" type="button">Próximo</button>
+        </div>
+      </div>
+
+      <div class="quiz-step" data-step="2">
+        <h3>Qual sua principal área hoje?</h3>
+        <div class="quiz-options" data-key="expertise">
+          <button class="quiz-opt" type="button">Tráfego pago</button>
+          <button class="quiz-opt" type="button">Automação e IA</button>
+          <button class="quiz-opt" type="button">Infoprodutos e low ticket</button>
+          <button class="quiz-opt" type="button">Copywriting e criativos</button>
+          <button class="quiz-opt" type="button">Ainda estou definindo</button>
+        </div>
+        <div class="quiz-nav">
+          <button class="quiz-back" type="button">← voltar</button>
+          <button class="quiz-next" type="button">Próximo</button>
+        </div>
+      </div>
+
+      <div class="quiz-step" data-step="3">
+        <h3>O que você mais busca agora?</h3>
+        <div class="quiz-options" data-key="interesse">
+          <button class="quiz-opt" type="button">Tráfego pago</button>
+          <button class="quiz-opt" type="button">Infoprodutos e low ticket</button>
+          <button class="quiz-opt" type="button">Automação e IA</button>
+          <button class="quiz-opt" type="button">Trocar ideia com outros profissionais</button>
+          <button class="quiz-opt" type="button">Um pouco de tudo</button>
+        </div>
+        <div class="quiz-nav">
+          <button class="quiz-back" type="button">← voltar</button>
+          <button class="quiz-next" type="button">Próximo</button>
+        </div>
+      </div>
+
+      <div class="quiz-step" data-step="4">
+        <h3>Quanto tempo por semana você imagina dedicar ao grupo?</h3>
+        <div class="quiz-options" data-key="tempo">
+          <button class="quiz-opt" type="button">Só acompanhar</button>
+          <button class="quiz-opt" type="button">De vez em quando</button>
+          <button class="quiz-opt" type="button">Ativamente</button>
+        </div>
+        <div class="quiz-nav">
+          <button class="quiz-back" type="button">← voltar</button>
+          <button class="quiz-next" type="button">Próximo</button>
+        </div>
+      </div>
+
+      <div class="quiz-step" data-step="5">
+        <h3>O que você gostaria de encontrar na comunidade para acelerar seu crescimento?</h3>
+        <textarea class="quiz-textarea" id="quizOpen" placeholder="Opcional, escreva livremente..."></textarea>
+        <div class="quiz-nav">
+          <button class="quiz-back" type="button">← voltar</button>
+          <span>
+            <button class="quiz-skip" type="button" id="quizSkip">Pular</button>
+            <button class="quiz-next enabled" type="button" id="quizFinish">Ver resultado</button>
+          </span>
+        </div>
+      </div>
+
+      <div class="quiz-step quiz-result" data-step="6">
+        <h3 id="resultTitle">Perfeito.</h3>
+        <p id="resultBody"></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="pricing" id="preco" style="display:none;">
+  <div class="wrap">
+    <p class="eyebrow">Entrada na comunidade</p>
+    <h2>O investimento de hoje é o menor que ele nunca mais vai ser</h2>
+    <p class="lead" style="margin-left:auto;margin-right:auto;">Conforme o Electi Club cresce e entrega mais valor, o investimento sobe. Quem entra agora garante o valor atual.</p>
+
+    <div class="card-membership">
+      <p class="card-eyebrow">Electi Club</p>
+      <p class="card-title">Membro Electi Club</p>
+      <p class="card-price">R$ 17<span>,90/ano</span></p>
+      <p class="card-price-note">cobrança anual · sem mensalidade</p>
+      <ul>
+        <li>Ambiente ativo de marketing digital, todos os dias</li>
+        <li>Profissionais comprometidos trocando o que está funcionando agora</li>
+        <li>Aprenda com quem já testou e evite repetir os mesmos erros</li>
+        <li>Cobrança anual, sem mensalidade</li>
+      </ul>
+      <a class="btn btn-primary" href="https://pay.hub.la/d9ovtXGPBHAwMIfi0Ynn/upsell" id="checkoutLink">Garantir minha vaga</a>
+    </div>
+    <!-- Ajuste o preço R$17,90/ano acima para o valor final que você decidir -->
+    <p class="card-fine">Cobrança anual. Sem mensalidade.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <img class="logo-icon" src="../assets/img/logo-icon.png" alt="Electi Club">
+    <p>Electi Club © <span id="year"></span> · Todos os direitos reservados.</p>
+    <p class="tag">Os escolhidos escolhem entrar.</p>
+  </div>
+</footer>
+
+<script src="../assets/js/quiz.js"></script>
+
+</body>
+</html>
