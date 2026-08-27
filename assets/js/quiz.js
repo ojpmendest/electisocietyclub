@@ -82,6 +82,8 @@ document.getElementById('year').textContent = new Date().getFullYear();
     answers.aberta = openField.value.trim();
     buildResult();
     sendToSheet();
+    var provaSection = document.getElementById('prova');
+    if(provaSection) provaSection.style.display = '';
     var precoSection = document.getElementById('preco');
     if(precoSection) precoSection.style.display = '';
     showStep(6);
