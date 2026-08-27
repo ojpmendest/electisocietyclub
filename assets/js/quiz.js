@@ -9,7 +9,7 @@ document.getElementById('year').textContent = new Date().getFullYear();
   var fill = document.getElementById('quizFill');
   var label = document.getElementById('quizLabel');
   var current = 0;
-  var totalSteps = 6; // steps 0-5 são perguntas, step 6 é o resultado
+  var totalSteps = 7; // steps 0-6 são perguntas/prova, step 7 é o resultado + preço
 
   function showStep(i){
     steps.forEach(function(s){ s.classList.remove('active'); });
@@ -84,29 +84,31 @@ document.getElementById('year').textContent = new Date().getFullYear();
     }
   });
 
-  // Step 5: campo aberto
+  // Step 5: campo aberto -> leva pro passo de prova social (step 6), ainda não finaliza
   var openField = document.getElementById('quizOpen');
-  var finishBtn = document.getElementById('quizFinish');
+  var continueBtn = document.getElementById('quizContinue');
   var skipBtn = document.getElementById('quizSkip');
   var openBack = steps[5].querySelector('.quiz-back');
   if(openBack){ openBack.addEventListener('click', function(){ showStep(4); }); }
 
-  function finish(){
+  function goToProof(){
     answers.aberta = openField.value.trim();
-    buildResult();
-    sendToSheet();
-    var provaSection = document.getElementById('prova');
-    if(provaSection){
-      provaSection.style.display = '';
-      // revelado via JS, não por scroll: ativa a animação na hora, sem depender do IntersectionObserver
-      provaSection.querySelectorAll('.reveal').forEach(function(el){ el.classList.add('in-view'); });
-    }
-    var precoSection = document.getElementById('preco');
-    if(precoSection) precoSection.style.display = '';
     showStep(6);
   }
-  if(finishBtn) finishBtn.addEventListener('click', finish);
-  if(skipBtn) skipBtn.addEventListener('click', finish);
+  if(continueBtn) continueBtn.addEventListener('click', goToProof);
+  if(skipBtn) skipBtn.addEventListener('click', goToProof);
+
+  // Step 6: prova social -> ao continuar, monta o resultado e revela o preço (mesmo passo final)
+  var proofBack = steps[6].querySelector('.quiz-back');
+  var proofNext = document.getElementById('quizProofNext');
+  if(proofBack){ proofBack.addEventListener('click', function(){ showStep(5); }); }
+
+  function finish(){
+    buildResult();
+    sendToSheet();
+    showStep(7);
+  }
+  if(proofNext) proofNext.addEventListener('click', finish);
 
   function sendToSheet(){
     if(!SHEET_WEBHOOK_URL) return;

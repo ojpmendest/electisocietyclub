@@ -29,7 +29,8 @@
     </div>
     <p class="eyebrow">Antes de você entrar</p>
     <h1>Vamos te conhecer primeiro.</h1>
-    <p class="lead">Isso não é uma avaliação. É a forma como o Electi Club conhece quem está chegando, para que possamos te conhecer melhor e explorar melhor o seu potencial.<br>Leva menos de um minuto.</p>
+    <p class="lead">Isso não é uma avaliação. É a forma como o Electi Club conhece quem está chegando, para que possamos te conhecer melhor e explorar melhor o seu potencial.</p>
+    <p class="quiz-subtitle">Leva menos de um minuto.</p>
     <div class="cta-row">
       <a class="btn btn-primary" href="#quiz" id="startBtn">Começar</a>
     </div>
@@ -42,7 +43,7 @@
     <div class="quiz-card reveal">
       <div class="quiz-progress">
         <div class="quiz-progress-track"><div class="quiz-progress-fill" id="quizFill"></div></div>
-        <span class="quiz-progress-label" id="quizLabel">Passo 1 de 6</span>
+        <span class="quiz-progress-label" id="quizLabel">Passo 1 de 7</span>
       </div>
 
       <div class="quiz-step active" data-step="0">
@@ -118,55 +119,47 @@
           <button class="quiz-back" type="button">← voltar</button>
           <span>
             <button class="quiz-skip" type="button" id="quizSkip">Pular</button>
-            <button class="quiz-next enabled" type="button" id="quizFinish">Ver resultado</button>
+            <button class="quiz-next enabled" type="button" id="quizContinue">Continuar</button>
           </span>
         </div>
       </div>
 
-      <div class="quiz-step quiz-result" data-step="6">
+      <div class="quiz-step" data-step="6">
+        <p class="eyebrow">Resultados de quem já faz parte</p>
+        <h3>Prova, não promessa.</h3>
+        <div class="quiz-proof-stack">
+          <img class="quiz-proof-shot" src="../assets/img/proof/saulo.jpg" alt="Print de depoimento de Saulo Fernandes sobre a mentoria">
+          <img class="quiz-proof-shot" src="../assets/img/proof/survey1.jpg" alt="Resposta de pesquisa de satisfação, nota 10">
+          <img class="quiz-proof-shot" src="../assets/img/proof/eduardo.jpg" alt="Print de conversa com Eduardo Pillareck sobre aumento de ticket médio">
+          <img class="quiz-proof-shot" src="../assets/img/proof/gabriel.jpg" alt="Print de conversa sobre resultado com aulas de IA">
+          <img class="quiz-proof-shot" src="../assets/img/proof/survey3.jpg" alt="Resposta de pesquisa de satisfação sobre suporte da comunidade">
+          <img class="quiz-proof-shot" src="../assets/img/proof/survey2.jpg" alt="Resposta de pesquisa de satisfação sobre gerenciador de anúncios">
+        </div>
+        <div class="quiz-nav">
+          <button class="quiz-back" type="button">← voltar</button>
+          <button class="quiz-next enabled" type="button" id="quizProofNext">Ver resultado</button>
+        </div>
+      </div>
+
+      <div class="quiz-step quiz-result" data-step="7">
         <h3 id="resultTitle">Perfeito.</h3>
         <p id="resultBody"></p>
+
+        <div class="quiz-price">
+          <p class="quiz-price-eyebrow">Entrada na comunidade</p>
+          <p class="quiz-price-value">R$ 17<span>,90/ano</span></p>
+          <p class="quiz-price-note">cobrança anual · sem mensalidade</p>
+          <ul class="quiz-price-list">
+            <li>Ambiente ativo de marketing digital, todos os dias</li>
+            <li>Profissionais comprometidos trocando o que está funcionando agora</li>
+            <li>Aprenda com quem já testou e evite repetir os mesmos erros</li>
+          </ul>
+          <a class="btn btn-primary" href="https://pay.hub.la/d9ovtXGPBHAwMIfi0Ynn/upsell" id="checkoutLink">Garantir minha vaga</a>
+          <!-- Ajuste o preço R$17,90/ano acima para o valor final que você decidir -->
+          <p class="quiz-price-fine">Cobrança anual. Sem mensalidade.</p>
+        </div>
       </div>
     </div>
-  </div>
-</section>
-
-<section class="testimonials" id="prova" style="display:none;">
-  <div class="wrap">
-    <p class="eyebrow reveal">Resultados de quem já faz parte</p>
-    <h2 class="reveal">Prova, <span class="ital">não promessa.</span></h2>
-    <div class="proof-grid stagger">
-      <img class="proof-shot reveal" src="../assets/img/proof/saulo.jpg" alt="Print de depoimento de Saulo Fernandes sobre a mentoria">
-      <img class="proof-shot reveal" src="../assets/img/proof/survey1.jpg" alt="Resposta de pesquisa de satisfação, nota 10">
-      <img class="proof-shot reveal" src="../assets/img/proof/eduardo.jpg" alt="Print de conversa com Eduardo Pillareck sobre aumento de ticket médio">
-      <img class="proof-shot reveal" src="../assets/img/proof/gabriel.jpg" alt="Print de conversa sobre resultado com aulas de IA">
-      <img class="proof-shot reveal" src="../assets/img/proof/survey3.jpg" alt="Resposta de pesquisa de satisfação sobre suporte da comunidade">
-      <img class="proof-shot reveal" src="../assets/img/proof/survey2.jpg" alt="Resposta de pesquisa de satisfação sobre gerenciador de anúncios">
-    </div>
-  </div>
-</section>
-
-<section class="pricing" id="preco" style="display:none;">
-  <div class="wrap">
-    <p class="eyebrow">Entrada na comunidade</p>
-    <h2>O investimento de hoje é o menor que ele nunca mais vai ser</h2>
-    <p class="lead" style="margin-left:auto;margin-right:auto;">Conforme o Electi Club cresce e entrega mais valor, o investimento sobe. Quem entra agora garante o valor atual.</p>
-
-    <div class="card-membership">
-      <p class="card-eyebrow">Electi Club</p>
-      <p class="card-title">Membro Electi Club</p>
-      <p class="card-price">R$ 17<span>,90/ano</span></p>
-      <p class="card-price-note">cobrança anual · sem mensalidade</p>
-      <ul>
-        <li>Ambiente ativo de marketing digital, todos os dias</li>
-        <li>Profissionais comprometidos trocando o que está funcionando agora</li>
-        <li>Aprenda com quem já testou e evite repetir os mesmos erros</li>
-        <li>Cobrança anual, sem mensalidade</li>
-      </ul>
-      <a class="btn btn-primary" href="https://pay.hub.la/d9ovtXGPBHAwMIfi0Ynn/upsell" id="checkoutLink">Garantir minha vaga</a>
-    </div>
-    <!-- Ajuste o preço R$17,90/ano acima para o valor final que você decidir -->
-    <p class="card-fine">Cobrança anual. Sem mensalidade.</p>
   </div>
 </section>
 
