@@ -83,7 +83,11 @@ document.getElementById('year').textContent = new Date().getFullYear();
     buildResult();
     sendToSheet();
     var provaSection = document.getElementById('prova');
-    if(provaSection) provaSection.style.display = '';
+    if(provaSection){
+      provaSection.style.display = '';
+      // revelado via JS, não por scroll: ativa a animação na hora, sem depender do IntersectionObserver
+      provaSection.querySelectorAll('.reveal').forEach(function(el){ el.classList.add('in-view'); });
+    }
     var precoSection = document.getElementById('preco');
     if(precoSection) precoSection.style.display = '';
     showStep(6);
