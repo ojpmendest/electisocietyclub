@@ -4,7 +4,7 @@
     // Cole aqui a URL do seu Apps Script depois de publicar (veja instruções no README)
     var SHEET_WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbwhM8eybu59EPl8DB14OK2zwB8lhMaQhGiuZh9INRqLpFYH4TLpSTgmPaJ4EHv8xU-b/exec';
 
-    var answers = {nivel:null, expertise:null, interesse:null, tempo:null, aberta:''};
+    var answers = {nivel:null, expertise:null, interesse:[], tempo:null, aberta:''};
     var steps = Array.from(document.querySelectorAll('.quiz-step'));
     var fill = document.getElementById('quizFill');
     var label = document.getElementById('quizLabel');
@@ -30,12 +30,25 @@
       var nextBtn = step.querySelector('.quiz-next');
       var backBtn = step.querySelector('.quiz-back');
 
+      var multi = (key === 'interesse');
+
       opts.forEach(function(opt){
         opt.addEventListener('click', function(){
-          opts.forEach(function(o){ o.classList.remove('selected'); });
-          opt.classList.add('selected');
-          answers[key] = opt.textContent;
-          if(nextBtn) nextBtn.classList.add('enabled');
+          if(multi){
+            opt.classList.toggle('selected');
+            answers[key] = Array.from(opts)
+              .filter(function(o){ return o.classList.contains('selected'); })
+              .map(function(o){ return o.textContent; });
+            if(nextBtn){
+              if(answers[key].length > 0) nextBtn.classList.add('enabled');
+              else nextBtn.classList.remove('enabled');
+            }
+          } else {
+            opts.forEach(function(o){ o.classList.remove('selected'); });
+            opt.classList.add('selected');
+            answers[key] = opt.textContent;
+            if(nextBtn) nextBtn.classList.add('enabled');
+          }
         });
       });
 
@@ -76,7 +89,7 @@
             data: new Date().toISOString(),
             nivel: answers.nivel || '',
             expertise: answers.expertise || '',
-            interesse: answers.interesse || '',
+            interesse: (answers.interesse || []).join(', '),
             tempo: answers.tempo || '',
             comentario: answers.aberta || ''
           })
@@ -86,15 +99,23 @@
       }
     }
 
+    function joinNatural(arr){
+      if(arr.length === 0) return '';
+      if(arr.length === 1) return arr[0];
+      return arr.slice(0, -1).join(', ') + ' e ' + arr[arr.length - 1];
+    }
+
     function buildResult(){
       var nivelTxt = {
-        'Iniciante':'começando agora',
-        'Já tenho resultados':'já com resultados',
-        'Já vivo disso':'já vivendo de marketing digital'
+        'Ainda não tenho resultados':'começando do zero',
+        'Tenho resultados, mas inconsistentes':'com resultados, mas ainda inconsistentes',
+        'Vivo disso e quero escalar':'vivendo disso e buscando escalar'
       }[answers.nivel] || 'construindo seu caminho';
 
       var expertiseTxt = answers.expertise ? answers.expertise.toLowerCase() : null;
-      var interesseTxt = answers.interesse ? answers.interesse.toLowerCase() : 'crescer no seu ritmo';
+      var interesseTxt = (answers.interesse && answers.interesse.length)
+        ? joinNatural(answers.interesse.map(function(s){ return s.toLowerCase(); }))
+        : 'crescer no seu ritmo';
 
       var tempoTxt = {
         'Só acompanhar':'começando devagar, apenas acompanhando',

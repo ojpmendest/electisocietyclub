@@ -262,6 +262,8 @@
   .quiz-step h3{
     font-family:'Fraunces',serif;font-weight:500;font-size:21px;margin-bottom:20px;
   }
+  .quiz-step h3 + .quiz-hint{margin-top:-14px;}
+  .quiz-hint{font-size:13px;color:var(--mute);margin-bottom:18px;}
   .quiz-options{display:flex;flex-direction:column;gap:10px;margin-bottom:26px;}
   .quiz-opt{
     text-align:left;
