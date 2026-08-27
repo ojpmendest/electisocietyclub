@@ -124,7 +124,7 @@ document.getElementById('year').textContent = new Date().getFullYear();
     }[answers.nivel] || 'construindo seu caminho';
 
     var expertiseTxt = answers.expertise ? answers.expertise.toLowerCase() : null;
-    var interesseTxt = answers.interesse ? answers.interesse.toLowerCase() : 'marketing digital';
+    var interesseTxt = answers.interesse ? answers.interesse.toLowerCase() : 'crescer no seu ritmo';
 
     var tempoTxt = {
       'Só acompanhar':'começando devagar, apenas acompanhando',
@@ -133,8 +133,8 @@ document.getElementById('year').textContent = new Date().getFullYear();
     }[answers.tempo] || 'no seu ritmo';
 
     var perfilTxt = expertiseTxt
-      ? 'Você está ' + nivelTxt + ' em ' + expertiseTxt + ', focado em ' + interesseTxt + ', e ' + tempoTxt + '. '
-      : 'Você está ' + nivelTxt + ', focado em ' + interesseTxt + ', e ' + tempoTxt + '. ';
+      ? 'Você está ' + nivelTxt + ' em ' + expertiseTxt + ', buscando ' + interesseTxt + ', e ' + tempoTxt + '. '
+      : 'Você está ' + nivelTxt + ', buscando ' + interesseTxt + ', e ' + tempoTxt + '. ';
 
     document.getElementById('resultBody').textContent =
       perfilTxt +
