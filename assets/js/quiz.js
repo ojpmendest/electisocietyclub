@@ -36,8 +36,19 @@ document.getElementById('year').textContent = new Date().getFullYear();
     var ok = nameInput.value.trim() && phoneInput.value.trim() && instaInput.value.trim();
     if(ok){ nameNext.classList.add('enabled'); } else { nameNext.classList.remove('enabled'); }
   }
+
+  function formatPhone(value){
+    var digits = value.replace(/\D/g, '').slice(0, 11);
+    if(digits.length <= 2) return digits.length ? '(' + digits : '';
+    if(digits.length <= 7) return '(' + digits.slice(0, 2) + ') ' + digits.slice(2);
+    return '(' + digits.slice(0, 2) + ') ' + digits.slice(2, 7) + '-' + digits.slice(7);
+  }
+
   nameInput.addEventListener('input', checkStep0);
-  phoneInput.addEventListener('input', checkStep0);
+  phoneInput.addEventListener('input', function(){
+    phoneInput.value = formatPhone(phoneInput.value);
+    checkStep0();
+  });
   instaInput.addEventListener('input', checkStep0);
 
   function submitStep0(){
