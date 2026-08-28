@@ -33,14 +33,15 @@ document.getElementById('year').textContent = new Date().getFullYear();
   var nameNext = document.getElementById('nameNext');
 
   function checkStep0(){
-    var ok = nameInput.value.trim() && phoneInput.value.trim();
+    var ok = nameInput.value.trim() && phoneInput.value.trim() && instaInput.value.trim();
     if(ok){ nameNext.classList.add('enabled'); } else { nameNext.classList.remove('enabled'); }
   }
   nameInput.addEventListener('input', checkStep0);
   phoneInput.addEventListener('input', checkStep0);
+  instaInput.addEventListener('input', checkStep0);
 
   function submitStep0(){
-    if(!nameInput.value.trim() || !phoneInput.value.trim()) return;
+    if(!nameInput.value.trim() || !phoneInput.value.trim() || !instaInput.value.trim()) return;
     answers.nome = nameInput.value.trim();
     answers.telefone = phoneInput.value.trim();
     answers.instagram = instaInput.value.trim();
