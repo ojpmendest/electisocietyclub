@@ -4,7 +4,7 @@ document.getElementById('year').textContent = new Date().getFullYear();
   // Cole aqui a URL do seu Google Apps Script depois de publicar (veja instruções no README)
   var SHEET_WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbwhM8eybu59EPl8DB14OK2zwB8lhMaQhGiuZh9INRqLpFYH4TLpSTgmPaJ4EHv8xU-b/exec';
 
-  var answers = {nome:'', nivel:null, expertise:null, interesse:[], tempo:null, aberta:''};
+  var answers = {nome:'', telefone:'', instagram:'', nivel:null, expertise:null, interesse:[], tempo:null, aberta:''};
   var steps = Array.from(document.querySelectorAll('.quiz-step'));
   var fill = document.getElementById('quizFill');
   var label = document.getElementById('quizLabel');
@@ -26,22 +26,30 @@ document.getElementById('year').textContent = new Date().getFullYear();
     if(heading){ heading.focus && heading.setAttribute('tabindex','-1'); }
   }
 
-  // Step 0: nome
+  // Step 0: nome, telefone (obrigatórios) e instagram (opcional)
   var nameInput = document.getElementById('quizName');
+  var phoneInput = document.getElementById('quizPhone');
+  var instaInput = document.getElementById('quizInstagram');
   var nameNext = document.getElementById('nameNext');
-  nameInput.addEventListener('input', function(){
-    var v = nameInput.value.trim();
-    if(v){ nameNext.classList.add('enabled'); } else { nameNext.classList.remove('enabled'); }
-  });
-  nameNext.addEventListener('click', function(){
-    var v = nameInput.value.trim();
-    if(!v) return;
-    answers.nome = v;
+
+  function checkStep0(){
+    var ok = nameInput.value.trim() && phoneInput.value.trim();
+    if(ok){ nameNext.classList.add('enabled'); } else { nameNext.classList.remove('enabled'); }
+  }
+  nameInput.addEventListener('input', checkStep0);
+  phoneInput.addEventListener('input', checkStep0);
+
+  function submitStep0(){
+    if(!nameInput.value.trim() || !phoneInput.value.trim()) return;
+    answers.nome = nameInput.value.trim();
+    answers.telefone = phoneInput.value.trim();
+    answers.instagram = instaInput.value.trim();
     showStep(1);
-  });
-  nameInput.addEventListener('keydown', function(e){
-    if(e.key === 'Enter' && nameInput.value.trim()){ showStep(1); }
-  });
+  }
+  nameNext.addEventListener('click', submitStep0);
+  nameInput.addEventListener('keydown', function(e){ if(e.key === 'Enter') submitStep0(); });
+  phoneInput.addEventListener('keydown', function(e){ if(e.key === 'Enter') submitStep0(); });
+  instaInput.addEventListener('keydown', function(e){ if(e.key === 'Enter') submitStep0(); });
 
   // Steps 1-4: perguntas de múltipla escolha
   steps.forEach(function(step, idx){
@@ -120,6 +128,8 @@ document.getElementById('year').textContent = new Date().getFullYear();
         body: JSON.stringify({
           data: new Date().toISOString(),
           nome: answers.nome || '',
+          telefone: answers.telefone || '',
+          instagram: answers.instagram || '',
           nivel: answers.nivel || '',
           expertise: answers.expertise || '',
           interesse: (answers.interesse || []).join(', '),
